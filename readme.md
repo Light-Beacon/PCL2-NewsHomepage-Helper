@@ -3,4 +3,5 @@
 
 ## 许可声明
 [MCWiki Logo](https://minecraft.fandom.com/zh/wiki/File:Site-logo.png) 基于 [BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.zh) 授权
+
 [Newtonsoft.Json](https://www.newtonsoft.com/json) 基于 [MIT](https://opensource.org/licenses/MIT) 授权
