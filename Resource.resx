@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Begin1" xml:space="preserve">
-    <value>&lt;local:MyCard Margin="0,0,0,15" Title="最新</value>
+    <value>&lt;local:MyCard Margin="0,0,0,15" Title="</value>
     <comment>开头1</comment>
   </data>
   <data name="Begin2" xml:space="preserve">
@@ -126,36 +126,40 @@
     <comment>开头中间连接符</comment>
   </data>
   <data name="Begin3" xml:space="preserve">
-    <value> " CanSwap="True"&gt;
-		&lt;!--Header--&gt;
-		&lt;StackPanel Margin="30,40,30,20"&gt;
-			&lt;Border Style="{StaticResource verImgBdr}"&gt;
-				&lt;Border.Background&gt;
-					&lt;ImageBrush ImageSource="</value>
-    <comment>开头2 接图片链接</comment>
+    <value> " CanSwap="True"</value>
+    <comment>开头2 接是否折叠</comment>
   </data>
   <data name="Begin4" xml:space="preserve">
-    <value>" Stretch="Uniform" /&gt;
-				&lt;/Border.Background&gt;
-				&lt;Image Source="</value>
+    <value>&gt;
+&lt;!--Header--&gt;
+&lt;StackPanel Margin="30,40,30,20"&gt;
+&lt;Border Style="{StaticResource verImgBdr}"&gt;
+&lt;Border.Background&gt;
+&lt;ImageBrush ImageSource="</value>
     <comment>开头3 接图片链接</comment>
   </data>
   <data name="Begin5" xml:space="preserve">
+    <value>" Stretch="Uniform" /&gt;
+&lt;/Border.Background&gt;
+&lt;Image Source="</value>
+    <comment>开头4 接图片链接</comment>
+  </data>
+  <data name="Begin6" xml:space="preserve">
     <value>" Opacity="0" /&gt;
-			&lt;/Border&gt;
-			&lt;Border Style="{StaticResource verTxtBdr}" x:Name="verBorder"&gt;
-				&lt;TextBlock Style="{StaticResource verTxtBlk}" Text="</value>
-    <comment>开头4 接中心版本号</comment>
+&lt;/Border&gt;
+&lt;Border Style="{StaticResource verTxtBdr}"&gt;
+&lt;TextBlock Style="{StaticResource verTxtBlk}" Text="</value>
+    <comment>开头5 接中心版本号</comment>
   </data>
   <data name="BeginEnd" xml:space="preserve">
     <value>" /&gt;
-			&lt;/Border&gt;
-			&lt;!--Details--&gt;</value>
+&lt;/Border&gt;
+&lt;!--Details--&gt;</value>
     <comment>开头结束</comment>
   </data>
   <data name="End" xml:space="preserve">
     <value>&lt;/StackPanel&gt;	
-	&lt;/local:MyCard&gt;</value>
+&lt;/local:MyCard&gt;</value>
     <comment>结尾句</comment>
   </data>
   <data name="FootNoteEnd" xml:space="preserve">
@@ -167,34 +171,34 @@
     <comment>脚注开始</comment>
   </data>
   <data name="ImageLinkHead" xml:space="preserve">
-    <value>https://www.lightbeacon.top/pnh/newimgs/</value>
+    <value>https://www.lightbeacon.top/pnh/newimgs/1_</value>
     <comment>图片链接头</comment>
   </data>
   <data name="Link1" xml:space="preserve">
     <value>&lt;GroupBox Header="阅读完整日志" BorderBrush="{DynamicResource ColorBrush3}"&gt;
-				&lt;Grid UseLayoutRounding="True" Margin="10,10,10,10"&gt;
-					&lt;Grid.ColumnDefinitions&gt;
-						&lt;ColumnDefinition Width="20*"&gt;&lt;/ColumnDefinition&gt;
-						&lt;ColumnDefinition Width="10*"&gt;&lt;/ColumnDefinition&gt;
-						&lt;ColumnDefinition Width="10*"&gt;&lt;/ColumnDefinition&gt;
-					&lt;/Grid.ColumnDefinitions&gt;
-					&lt;local:MyButton Style="{StaticResource Read0}" EventData="</value>
+&lt;Grid UseLayoutRounding="True" Margin="10,10,10,10"&gt;
+&lt;Grid.ColumnDefinitions&gt;
+&lt;ColumnDefinition Width="20*"&gt;&lt;/ColumnDefinition&gt;
+&lt;ColumnDefinition Width="10*"&gt;&lt;/ColumnDefinition&gt;
+&lt;ColumnDefinition Width="10*"&gt;&lt;/ColumnDefinition&gt;
+&lt;/Grid.ColumnDefinitions&gt;
+&lt;local:MyButton Style="{StaticResource Read0}" EventData="</value>
     <comment>完整日志开头 接Wiki链接</comment>
   </data>
   <data name="Link2" xml:space="preserve">
     <value>" ColorType="Highlight" /&gt;
-					&lt;local:MyButton Style="{StaticResource Read1}" EventData="</value>
+&lt;local:MyButton Style="{StaticResource Read1}" EventData="</value>
     <comment>完整日志 接MCBBS链接</comment>
   </data>
   <data name="Link3" xml:space="preserve">
     <value>"/&gt;
-					&lt;local:MyButton Style="{StaticResource Read2}" EventData="</value>
+&lt;local:MyButton Style="{StaticResource Read2}" EventData="</value>
     <comment>完整日志 接官网链接</comment>
   </data>
   <data name="LinkEnd" xml:space="preserve">
     <value>" /&gt;
-				&lt;/Grid&gt;
-			&lt;/GroupBox&gt;</value>
+&lt;/Grid&gt;
+&lt;/GroupBox&gt;</value>
     <comment>完整日志结束</comment>
   </data>
   <data name="ListEnd" xml:space="preserve">
@@ -218,7 +222,7 @@
   <data name="MCWLogo" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAK4AAACQCAYAAACRfFAzAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAd4FJREFUeF7tfQeYVcX5/tLb9t57772z9LIFtrFL77333i6w9N4FQRFEAemiAqJI
+        wAAADsABataJCQAAd4FJREFUeF7tfQeYVcX5/tLb9t57772z9LIFtrFL77333i6w9N4FQRFEAemiAqJI
         R1BTNDFGjRr1ZxdRUanv/3vn3Nm9LJho/klMzM7zvM85d87MN+2db74p51yrGlfjalyNq3E17l/vAJg0
         zF7KWfpXf1bjatwv4qqT8ufALKLG1bh/ryP5buO2IuHN2zB9g69Mf8Grpmv4xkzOOwpf46rpTfzJ9Ee8
         YvoO3yu/27hpuokfTLfkqsJKfMoyi65xNe6f727fvi2Eu6UI98Od700f433T8ziyKPoxn+99d9shdofv
@@ -731,6 +735,23 @@
         /tXOyur/AYjaiT9HGVzFAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="SeparatorBegin" xml:space="preserve">
+    <value>&lt;Grid Margin="0,0,0,15"&gt;
+&lt;Grid.ColumnDefinitions&gt;
+&lt;ColumnDefinition Width="1*"&gt;&lt;/ColumnDefinition&gt;
+&lt;ColumnDefinition Width="100"&gt;&lt;/ColumnDefinition&gt;
+&lt;ColumnDefinition Width="1*"&gt;&lt;/ColumnDefinition&gt;
+&lt;/Grid.ColumnDefinitions&gt;
+&lt;Line X1="0" X2="100" Stroke="{DynamicResource ColorBrush5}" StrokeThickness="1.5" HorizontalAlignment="Center" Stretch="Fill" Grid.Column="0" /&gt;
+&lt;TextBlock Text="</value>
+    <comment>分隔线开始，后接分割线标题</comment>
+  </data>
+  <data name="SeparatorEnd" xml:space="preserve">
+    <value>" HorizontalAlignment="Center" FontSize="14" Foreground="{DynamicResource ColorBrush5}" Grid.Column="1" VerticalAlignment="Center" /&gt;
+&lt;Line X1="0" X2="100" Stroke="{DynamicResource ColorBrush5}" StrokeThickness="1.5" HorizontalAlignment="Center" Stretch="Fill" Grid.Column="2" /&gt;
+&lt;/Grid&gt;</value>
+    <comment>分割线结束</comment>
+  </data>
   <data name="Title1" xml:space="preserve">
     <value>&lt;TextBlock Text="</value>
     <comment>n级标题开头 接标题内容</comment>
@@ -749,23 +770,23 @@
   </data>
   <data name="WikiBtn2" xml:space="preserve">
     <value>"&gt;
-						&lt;Border&gt;
-							&lt;StackPanel&gt;
-								&lt;Border Style="{StaticResource NameBdr}"&gt;
-									&lt;TextBlock Text="</value>
+&lt;Border&gt;
+&lt;StackPanel&gt;
+&lt;Border Style="{StaticResource NameBdr}"&gt;
+&lt;TextBlock Text="</value>
     <comment>维基按钮 接物品/方块名称</comment>
   </data>
   <data name="WikiBtn3" xml:space="preserve">
     <value>" /&gt;
-								&lt;/Border&gt;
-								&lt;Image Source="</value>
+&lt;/Border&gt;
+&lt;Image Source="</value>
     <comment>维基按钮 接图片链接</comment>
   </data>
   <data name="WikiBtnEnde" xml:space="preserve">
     <value>" /&gt;
-							&lt;/StackPanel&gt;
-						&lt;/Border&gt;
-					&lt;/local:MyButton&gt;</value>
+&lt;/StackPanel&gt;
+&lt;/Border&gt;
+&lt;/local:MyButton&gt;</value>
     <comment>维基按钮结束</comment>
   </data>
 </root>

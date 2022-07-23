@@ -61,7 +61,7 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
-        ///   查找类似 &lt;local:MyCard Margin=&quot;0,0,0,15&quot; Title=&quot;最新 的本地化字符串。
+        ///   查找类似 &lt;local:MyCard Margin=&quot;0,0,0,15&quot; Title=&quot; 的本地化字符串。
         /// </summary>
         internal static string Begin1 {
             get {
@@ -79,12 +79,7 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
-        ///   查找类似  &quot; CanSwap=&quot;True&quot;&gt;
-        ///		&lt;!--Header--&gt;
-        ///		&lt;StackPanel Margin=&quot;30,40,30,20&quot;&gt;
-        ///			&lt;Border Style=&quot;{StaticResource verImgBdr}&quot;&gt;
-        ///				&lt;Border.Background&gt;
-        ///					&lt;ImageBrush ImageSource=&quot; 的本地化字符串。
+        ///   查找类似  &quot; CanSwap=&quot;True&quot; 的本地化字符串。
         /// </summary>
         internal static string Begin3 {
             get {
@@ -93,9 +88,12 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
-        ///   查找类似 &quot; Stretch=&quot;Uniform&quot; /&gt;
-        ///				&lt;/Border.Background&gt;
-        ///				&lt;Image Source=&quot; 的本地化字符串。
+        ///   查找类似 &gt;
+        ///&lt;!--Header--&gt;
+        ///&lt;StackPanel Margin=&quot;30,40,30,20&quot;&gt;
+        ///&lt;Border Style=&quot;{StaticResource verImgBdr}&quot;&gt;
+        ///&lt;Border.Background&gt;
+        ///&lt;ImageBrush ImageSource=&quot; 的本地化字符串。
         /// </summary>
         internal static string Begin4 {
             get {
@@ -104,10 +102,9 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
-        ///   查找类似 &quot; Opacity=&quot;0&quot; /&gt;
-        ///			&lt;/Border&gt;
-        ///			&lt;Border Style=&quot;{StaticResource verTxtBdr}&quot; x:Name=&quot;verBorder&quot;&gt;
-        ///				&lt;TextBlock Style=&quot;{StaticResource verTxtBlk}&quot; Text=&quot; 的本地化字符串。
+        ///   查找类似 &quot; Stretch=&quot;Uniform&quot; /&gt;
+        ///&lt;/Border.Background&gt;
+        ///&lt;Image Source=&quot; 的本地化字符串。
         /// </summary>
         internal static string Begin5 {
             get {
@@ -116,9 +113,21 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
+        ///   查找类似 &quot; Opacity=&quot;0&quot; /&gt;
+        ///&lt;/Border&gt;
+        ///&lt;Border Style=&quot;{StaticResource verTxtBdr}&quot;&gt;
+        ///&lt;TextBlock Style=&quot;{StaticResource verTxtBlk}&quot; Text=&quot; 的本地化字符串。
+        /// </summary>
+        internal static string Begin6 {
+            get {
+                return ResourceManager.GetString("Begin6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &quot; /&gt;
-        ///			&lt;/Border&gt;
-        ///			&lt;!--Details--&gt; 的本地化字符串。
+        ///&lt;/Border&gt;
+        ///&lt;!--Details--&gt; 的本地化字符串。
         /// </summary>
         internal static string BeginEnd {
             get {
@@ -128,7 +137,7 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &lt;/StackPanel&gt;	
-        ///	&lt;/local:MyCard&gt; 的本地化字符串。
+        ///&lt;/local:MyCard&gt; 的本地化字符串。
         /// </summary>
         internal static string End {
             get {
@@ -155,7 +164,7 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
-        ///   查找类似 https://www.lightbeacon.top/pnh/newimgs/ 的本地化字符串。
+        ///   查找类似 https://www.lightbeacon.top/pnh/newimgs/1_ 的本地化字符串。
         /// </summary>
         internal static string ImageLinkHead {
             get {
@@ -165,13 +174,13 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &lt;GroupBox Header=&quot;阅读完整日志&quot; BorderBrush=&quot;{DynamicResource ColorBrush3}&quot;&gt;
-        ///				&lt;Grid UseLayoutRounding=&quot;True&quot; Margin=&quot;10,10,10,10&quot;&gt;
-        ///					&lt;Grid.ColumnDefinitions&gt;
-        ///						&lt;ColumnDefinition Width=&quot;20*&quot;&gt;&lt;/ColumnDefinition&gt;
-        ///						&lt;ColumnDefinition Width=&quot;10*&quot;&gt;&lt;/ColumnDefinition&gt;
-        ///						&lt;ColumnDefinition Width=&quot;10*&quot;&gt;&lt;/ColumnDefinition&gt;
-        ///					&lt;/Grid.ColumnDefinitions&gt;
-        ///					&lt;local:MyButton Style=&quot;{StaticResource Read0}&quot; EventData=&quot; 的本地化字符串。
+        ///&lt;Grid UseLayoutRounding=&quot;True&quot; Margin=&quot;10,10,10,10&quot;&gt;
+        ///&lt;Grid.ColumnDefinitions&gt;
+        ///&lt;ColumnDefinition Width=&quot;20*&quot;&gt;&lt;/ColumnDefinition&gt;
+        ///&lt;ColumnDefinition Width=&quot;10*&quot;&gt;&lt;/ColumnDefinition&gt;
+        ///&lt;ColumnDefinition Width=&quot;10*&quot;&gt;&lt;/ColumnDefinition&gt;
+        ///&lt;/Grid.ColumnDefinitions&gt;
+        ///&lt;local:MyButton Style=&quot;{StaticResource Read0}&quot; EventData=&quot; 的本地化字符串。
         /// </summary>
         internal static string Link1 {
             get {
@@ -181,7 +190,7 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &quot; ColorType=&quot;Highlight&quot; /&gt;
-        ///					&lt;local:MyButton Style=&quot;{StaticResource Read1}&quot; EventData=&quot; 的本地化字符串。
+        ///&lt;local:MyButton Style=&quot;{StaticResource Read1}&quot; EventData=&quot; 的本地化字符串。
         /// </summary>
         internal static string Link2 {
             get {
@@ -191,7 +200,7 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &quot;/&gt;
-        ///					&lt;local:MyButton Style=&quot;{StaticResource Read2}&quot; EventData=&quot; 的本地化字符串。
+        ///&lt;local:MyButton Style=&quot;{StaticResource Read2}&quot; EventData=&quot; 的本地化字符串。
         /// </summary>
         internal static string Link3 {
             get {
@@ -201,8 +210,8 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &quot; /&gt;
-        ///				&lt;/Grid&gt;
-        ///			&lt;/GroupBox&gt; 的本地化字符串。
+        ///&lt;/Grid&gt;
+        ///&lt;/GroupBox&gt; 的本地化字符串。
         /// </summary>
         internal static string LinkEnd {
             get {
@@ -258,6 +267,33 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
+        ///   查找类似 &lt;Grid Margin=&quot;0,0,0,15&quot;&gt;
+        ///&lt;Grid.ColumnDefinitions&gt;
+        ///&lt;ColumnDefinition Width=&quot;1*&quot;&gt;&lt;/ColumnDefinition&gt;
+        ///&lt;ColumnDefinition Width=&quot;100&quot;&gt;&lt;/ColumnDefinition&gt;
+        ///&lt;ColumnDefinition Width=&quot;1*&quot;&gt;&lt;/ColumnDefinition&gt;
+        ///&lt;/Grid.ColumnDefinitions&gt;
+        ///&lt;Line X1=&quot;0&quot; X2=&quot;100&quot; Stroke=&quot;{DynamicResource ColorBrush5}&quot; StrokeThickness=&quot;1.5&quot; HorizontalAlignment=&quot;Center&quot; Stretch=&quot;Fill&quot; Grid.Column=&quot;0&quot; /&gt;
+        ///&lt;TextBlock Text=&quot; 的本地化字符串。
+        /// </summary>
+        internal static string SeparatorBegin {
+            get {
+                return ResourceManager.GetString("SeparatorBegin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &quot; HorizontalAlignment=&quot;Center&quot; FontSize=&quot;14&quot; Foreground=&quot;{DynamicResource ColorBrush5}&quot; Grid.Column=&quot;1&quot; VerticalAlignment=&quot;Center&quot; /&gt;
+        ///&lt;Line X1=&quot;0&quot; X2=&quot;100&quot; Stroke=&quot;{DynamicResource ColorBrush5}&quot; StrokeThickness=&quot;1.5&quot; HorizontalAlignment=&quot;Center&quot; Stretch=&quot;Fill&quot; Grid.Column=&quot;2&quot; /&gt;
+        ///&lt;/Grid&gt; 的本地化字符串。
+        /// </summary>
+        internal static string SeparatorEnd {
+            get {
+                return ResourceManager.GetString("SeparatorEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 &lt;TextBlock Text=&quot; 的本地化字符串。
         /// </summary>
         internal static string Title1 {
@@ -295,10 +331,10 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &quot;&gt;
-        ///						&lt;Border&gt;
-        ///							&lt;StackPanel&gt;
-        ///								&lt;Border Style=&quot;{StaticResource NameBdr}&quot;&gt;
-        ///									&lt;TextBlock Text=&quot; 的本地化字符串。
+        ///&lt;Border&gt;
+        ///&lt;StackPanel&gt;
+        ///&lt;Border Style=&quot;{StaticResource NameBdr}&quot;&gt;
+        ///&lt;TextBlock Text=&quot; 的本地化字符串。
         /// </summary>
         internal static string WikiBtn2 {
             get {
@@ -308,8 +344,8 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &quot; /&gt;
-        ///								&lt;/Border&gt;
-        ///								&lt;Image Source=&quot; 的本地化字符串。
+        ///&lt;/Border&gt;
+        ///&lt;Image Source=&quot; 的本地化字符串。
         /// </summary>
         internal static string WikiBtn3 {
             get {
@@ -319,9 +355,9 @@ namespace NewsHomepageHelper {
         
         /// <summary>
         ///   查找类似 &quot; /&gt;
-        ///							&lt;/StackPanel&gt;
-        ///						&lt;/Border&gt;
-        ///					&lt;/local:MyButton&gt; 的本地化字符串。
+        ///&lt;/StackPanel&gt;
+        ///&lt;/Border&gt;
+        ///&lt;/local:MyButton&gt; 的本地化字符串。
         /// </summary>
         internal static string WikiBtnEnde {
             get {
