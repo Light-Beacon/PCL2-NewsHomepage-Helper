@@ -48,11 +48,11 @@
                                 <Button x:Name="ContentMoveDownBtn" Content="↓" Width="30" Margin="3" FontFamily="Microsoft YaHei UI" Click="ContentMoveDownBtn_Click"/>
                                 <Button x:Name="ContentDelBtn" Content="X" Width="30" Margin="3" FontFamily="Microsoft YaHei UI" Click="ContentDelBtn_Click"/>
                                 <Button x:Name="SeparatorBtn" Content="--" Width="30" Margin="3" FontFamily="Microsoft YaHei UI" Click="SeparatorBtn_Click"/>
-                                <Button Content="Edit" Width="35" Margin="3" FontFamily="Microsoft YaHei UI"/>
-                                <Button x:Name="ContentFoldBtn" Content="Fold" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="ContentFoldBtn_Click"/>
-                                <Button x:Name="SaveBtn" Content="Save" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="SaveBtn_Click" />
-                                <Button x:Name="LoadBtn" Content="Load" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="LoadBtn_Click" />
-                                <Button x:Name="GeneBtn" Content="Gene" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="GeneBtn_Click"/>
+                                <Button Content="编辑" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" IsEnabled="False"/>
+                                <Button x:Name="ContentFoldBtn" Content="折叠" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="ContentFoldBtn_Click"/>
+                                <Button x:Name="SaveBtn" Content="保存" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="SaveBtn_Click" />
+                                <Button x:Name="LoadBtn" Content="加载" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="LoadBtn_Click" />
+                                <Button x:Name="GeneBtn" Content="生成" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="GeneBtn_Click"/>
                             </StackPanel>
                             <ListBox x:Name="ResListBox" Margin="8,5" Grid.Column="2" Grid.Row="0">
                                 <ListBox.ItemTemplate>
@@ -64,9 +64,13 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
                             <StackPanel Orientation="Horizontal" Margin="5,2" Grid.Row="1" Grid.Column="2">
-                                <Button Content="创建" Width="80" Margin="3" FontFamily="Microsoft YaHei UI"/>
-                                <Button Content="管理" Width="80" Margin="3" FontFamily="Microsoft YaHei UI"/>
-                                <Button x:Name="ImportBtn" Content="导入" Width="80" Margin="3" FontFamily="Microsoft YaHei UI" Click="ImportBtn_Click"/>
+                                <Button Content="创建" Width="50" Margin="3" FontFamily="Microsoft YaHei UI" IsEnabled="False"/>
+                                <Button Content="管理" Width="50" Margin="3" FontFamily="Microsoft YaHei UI" IsEnabled="False"/>
+                                <Button x:Name="ImportBtn" Content="导入" Width="50" Margin="3" FontFamily="Microsoft YaHei UI" Click="ImportBtn_Click"/>
+                                <Button x:Name="ImportCustomBtn" Content="导入自定义" Width="80" Margin="3" FontFamily="Microsoft YaHei UI" Click="ImportCustomBtn_Click"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                                <Button x:Name="ThrowButton" Content="←" Margin="5" Height="30" Click="ThrowButton_Click"/>
                             </StackPanel>
                         </Grid>
                     </GroupBox>
@@ -180,13 +184,13 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="版本管理">
+            <TabItem Header="版本管理" IsEnabled="False">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock FontSize="48"> TO DO :D</TextBlock>
                 </Grid>
             </TabItem>
 
-            <TabItem Header="选项">
+            <TabItem Header="选项" IsEnabled="False">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock FontSize="48"> TO DO :D</TextBlock>
                 </Grid>

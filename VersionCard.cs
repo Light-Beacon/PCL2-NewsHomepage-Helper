@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -102,9 +103,8 @@ namespace WpfApp1
             //Begining
             output += rh.GetStr("Begin1");
             output += displayTitle;
-            output += versionID;
             output += rh.GetStr("Begin3");
-            output += (isSwaped ? "IsSwaped=\"True\"" : "");
+            output += (isSwaped ? " IsSwaped=\"True\"" : "");
             output += rh.GetStr("Begin4");
             output += headerImageUrl;
             output += rh.GetStr("Begin5");
@@ -153,7 +153,7 @@ namespace WpfApp1
             return card.ToJObject();
         }
 
-        public override JObject ToJObject()
+        public override JObject ToJObject(bool withdata = true)
         {
             JObject jobj = new JObject();
             jobj.Add("name", name);
@@ -166,7 +166,8 @@ namespace WpfApp1
             jobj.Add("mcbbsUrl", mcbbsUrl);
             jobj.Add("websiteUrl", websiteUrl);
             jobj.Add("footnote", footnote);
-            jobj.Add("mdcode", mdCode);
+            if(withdata)
+                jobj.Add("mdcode", mdCode);
             return jobj;
         }
 
@@ -183,7 +184,7 @@ namespace WpfApp1
 
         public VersionCard(JObject jobj,string rootpath)
         {
-            JArray array = JArray.Parse(FileHelper.ReadFile(rootpath + "Versions\\" + jobj["path"].ToString() + ".json"));
+            JArray array = JArray.Parse(File.ReadAllText(rootpath + "Versions\\" + jobj["path"].ToString() + ".json"));
             foreach(JObject item in array)
             {
                 if(item["name"].ToString() == jobj["name"].ToString())
@@ -191,7 +192,7 @@ namespace WpfApp1
                     this.versionID = item["versionID"].ToString();
                     this.versionType = (MCVType)Enum.Parse(typeof(MCVType), item["versionType"].ToString());
                     this.headerImageUrl = item["headerImageUrl"].ToString();
-                    this.mdCode = FileHelper.ReadFile(rootpath + "Versions\\" + item["filename"]);
+                    this.mdCode = File.ReadAllText(rootpath + "Versions\\" + item["filename"]);
                     this.wikiUrl = item["wikiUrl"].ToString();
                     this.mcbbsUrl = item["mcbbsUrl"].ToString(); 
                     this.websiteUrl = item["websiteUrl"].ToString();

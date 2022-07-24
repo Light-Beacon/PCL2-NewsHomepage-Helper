@@ -257,6 +257,22 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
+        ///   查找类似 &lt;!--
+        ///	 	              ___       ___                                                  
+        ///     		         /\_ \    /&apos;___`\                                                
+        ///       _____     ___\//\ \  /\_\ /\ \       ___      __   __  __  __    ____      
+        ///     /\ &apos;__`\  /&apos;___\\ \ \ \/_/// /__     /&apos; _ `\  /&apos;__`\/\ \/\ \/\ \  /&apos;,__\     
+        ///     \ \ \L\ \/\ \__/ \_\ \_  // /_\ \    /\ \/\ \/\  __/\ \ \_/ \_/ \/\__, `\    
+        ///      \ \ ,__/\ \____\/\____\/\______/    \ \_\ \_\ \____\\ \___x___/&apos;\/\____/    
+        ///       [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string Mark {
+            get {
+                return ResourceManager.GetString("Mark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap MCWLogo {
@@ -290,6 +306,50 @@ namespace NewsHomepageHelper {
         internal static string SeparatorEnd {
             get {
                 return ResourceManager.GetString("SeparatorEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;StackPanel Margin=&quot;0,-10,0,0&quot;&gt;
+        ///	&lt;!--Animations Starts--&gt;
+        ///	&lt;StackPanel.Triggers&gt; 的本地化字符串。
+        /// </summary>
+        internal static string Stut1 {
+            get {
+                return ResourceManager.GetString("Stut1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;/StackPanel.Triggers&gt;
+        ///	&lt;!--Animations Ends--&gt;
+        ///
+        ///	&lt;StackPanel.Resources&gt;
+        ///		&lt;!--Template Starts--&gt;
+        ///		&lt;!--Template Ends--&gt;
+        ///		&lt;!--Styles Starts--&gt; 的本地化字符串。
+        /// </summary>
+        internal static string Stut2 {
+            get {
+                return ResourceManager.GetString("Stut2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;/StackPanel.Resources&gt; 的本地化字符串。
+        /// </summary>
+        internal static string Stut3 {
+            get {
+                return ResourceManager.GetString("Stut3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;/StackPanel&gt; 的本地化字符串。
+        /// </summary>
+        internal static string Stut4 {
+            get {
+                return ResourceManager.GetString("Stut4", resourceCulture);
             }
         }
         

@@ -291,23 +291,63 @@ namespace WpfApp1
 
         private void GeneBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(GenerateXAMLCode());
+            try
+            {
+                string code = GenerateXAMLCode();
+                Clipboard.SetText(code);
+                File.WriteAllText(projectPath + "News.xaml", code);
+                SaveContent();
+                MessageBox.Show("已复制到剪贴板并生成文件");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         string GenerateXAMLCode()
         {
+            if(projectPath == null)
+            {
+                loadContentWithDlg();
+            }
             string result = string.Empty;
-            foreach(var card in cardList)
+            ResourceHelper resourceHelper = new ResourceHelper();
+            result += resourceHelper.GetStr("Mark");
+            result += resourceHelper.GetStr("Stut1");
+            result += File.ReadAllText(projectPath + "Animation.xaml");
+            result += resourceHelper.GetStr("Stut2");
+            result += File.ReadAllText(projectPath + "Style.xaml");
+            result += resourceHelper.GetStr("Stut3");
+            foreach (var card in cardList)
             {
                 result += card.GetCode();
             }
+            result += resourceHelper.GetStr("Stut4");
+            result += File.ReadAllText(projectPath + "RefreshBar.xaml");
+            result += File.ReadAllText(projectPath + "Footer.xaml");
             return result;
         }
 
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            SaveContent();
-            MessageBox.Show("保存成功！");
+            if (projectPath == null)
+            {
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                dlg.Filter = "新闻主页工程文件|*.nhpj";
+                dlg.Title = "打开新闻主页工程文件";
+                if (dlg.ShowDialog().Value)
+                {
+                    projectPath = Path.GetDirectoryName(dlg.FileName) + "\\";
+                    SaveContent();
+                }
+            }
+            else
+            {
+                SaveContent();
+                MessageBox.Show("保存成功！");
+            }
         }
 
         ObservableCollection<ContentCard> resList;
@@ -344,16 +384,12 @@ namespace WpfApp1
                     jArray = JArray.Parse(str);
                     foreach (JObject card in jArray)
                     {
-                        string path = Path.GetDirectoryName(filePath) + "\\" + Path.GetFileNameWithoutExtension(filePath) + "\\" + card["filename"].ToString();
+                        string path = Path.GetDirectoryName(filePath) + "\\" + card["filename"].ToString();
                         if (!File.Exists(path))
                             throw new Exception("路径不存在:" + path);
-                        FileStream _fs = new FileStream(path, FileMode.Open);
-                        StreamReader _sr = new StreamReader(_fs, System.Text.Encoding.UTF8);
-                        string code = _sr.ReadToEnd();
+                        string code = File.ReadAllText(path);
                         card.Add("mdcode",code);
                         resList.Add((VersionCard)card);
-                        _sr.Close();
-                        _fs.Close();
                     }
                 }
                 catch (Exception ex)
@@ -365,7 +401,6 @@ namespace WpfApp1
 
         public void SaveContent()
         {
-            string projectPath= "C:\\Users\\26826\\Desktop\\source\\";
             string projectHPFileName = "News.json";
             JArray array = new JArray();
             JObject pairs;
@@ -376,42 +411,58 @@ namespace WpfApp1
                 if(card.type != "Separator")
                 {
                     string path = card.path;
-                    string folder = card.type;
-                    folder += 's';  //e.g. Version -> Versions
                     pairs.Add("path", path);
-                    string jsonpath = projectPath + folder + "\\" + path + ".json";
-                    JArray sources = new JArray();
-                    if (File.Exists(jsonpath))
+                    if(card.type == "Version")
                     {
-                        FileStream fs = new FileStream(jsonpath, FileMode.Open);//e.g. .../Versions/1.19.json
-                        StreamReader sr = new StreamReader(fs, System.Text.Encoding.UTF8);
-                        string temp = sr.ReadToEnd();
-                        sources = JArray.Parse(temp);
-                        sr.Close();
-                        fs.Close();
+                        string folder = card.type;
+                        folder += 's';  //e.g. Version -> Versions
+                        string jsonpath = projectPath + folder + "\\" + path + ".json";
+                        JArray sources = new JArray();
+                        if (File.Exists(jsonpath))
+                        {
+                            string temp = File.ReadAllText(jsonpath);
+                            sources = JArray.Parse(temp);
+                        }
+                        sources = EditJson(sources, card , projectPath + folder + "\\");
+                        File.WriteAllText(jsonpath, sources.ToString());
                     }
-                    sources = EditJson(sources, card , projectPath + folder + "\\");
-                    FileHelper.WriteFile(jsonpath, sources.ToString());
                 }
                 pairs.Add("type", card.type);
                 if(card.isSwaped)
                     pairs.Add("isswaped", card.isSwaped);
                 array.Add(pairs);
             }
-            FileHelper.WriteFile(projectPath + projectHPFileName, array.ToString());
+            File.WriteAllText(projectPath + projectHPFileName, array.ToString());
         }
 
+        string projectPath = null; 
         private void LoadBtn_Click(object sender, RoutedEventArgs e)
         {
-            loadContent();
+            loadContentWithDlg();
         }
 
-        public void loadContent()
+        public void loadContentWithDlg()
         {
-            string projectPath = "C:\\Users\\26826\\Desktop\\source\\";
+            if (projectPath == null)
+            {
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                dlg.Filter = "新闻主页工程文件|*.nhpj";
+                dlg.Title = "打开新闻主页工程文件";
+                if (dlg.ShowDialog().Value)
+                {
+                    projectPath = Path.GetDirectoryName(dlg.FileName) + "\\";
+                    loadContent(projectPath);
+                }
+            }
+            else
+                loadContent(projectPath);
+        }
+
+        public void loadContent(string projectPath)
+        {
             string projectHPFileName = "News.json";
             cardList.Clear();
-            JArray array = JArray.Parse(FileHelper.ReadFile(projectPath + projectHPFileName));
+            JArray array = JArray.Parse(File.ReadAllText(projectPath + projectHPFileName));
             {
                 ContentCard card;
                 foreach (JObject obj in array)
@@ -425,10 +476,15 @@ namespace WpfApp1
                             card = (Separator)obj;
                             break;
                         case "Custom":
-                            throw new NotImplementedException();
+                            card = new CustomPart(obj, projectPath);
+                            break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
+                    if (obj["isswaped"] != null && obj["isswaped"].ToString().ToLower() == "true")
+                        card.isSwaped = true;
+                    else
+                        card.isSwaped = false;
                     cardList.Add(card);
                 }
             }
@@ -439,10 +495,10 @@ namespace WpfApp1
         {
             if(!CardInArrayAndEdited(array, card, path))
             {
-                JObject valuePairs = card.ToJObject();
+                JObject valuePairs = card.ToJObject(false);
                 valuePairs.Add("filename", card.dataFileName);
                 array.Add(valuePairs);
-                FileHelper.WriteFile(path + card.dataFileName, card.GetData());
+                File.WriteAllText(path + card.dataFileName, card.GetData());
             }
 
             return array;
@@ -455,40 +511,62 @@ namespace WpfApp1
                 if (array[i]["name"].ToString() == card.name)
                 {
                     string temp = array[i]["filename"].ToString();
-                    array[i] = card.ToJObject();
+                    array[i] = card.ToJObject(false);
                     array[i]["filename"] = temp;
-                    FileHelper.WriteFile(path + temp, card.GetData());
+                    File.WriteAllText(path + temp, card.GetData());
                     return true;
                 }
             }
             return false;
         }
-    }
 
-    public static class FileHelper
-    {
-        public static void WriteFile(string path, string ctx)
+        private void ImportCustomBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(path))
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.Filter = "Xaml 文件|*.xaml";
+            dlg.Title = "打开xmal文件";
+            if (dlg.ShowDialog().Value)
             {
-                string directoryName = Path.GetDirectoryName(path);
-                if (!Directory.Exists(directoryName))
-                    Directory.CreateDirectory(directoryName);
-                //File.Create(path);
+                string xamlPath = dlg.FileName;
+                string dire = Path.GetDirectoryName(xamlPath);
+                if (dire.EndsWith("Customs"))
+                {
+                    Microsoft.Win32.SaveFileDialog dlg2 = new Microsoft.Win32.SaveFileDialog();
+                    dlg.Filter = "JSON 文件|*.json";
+                    dlg.Title = "保存定义json文件";
+                    if (dlg2.ShowDialog().Value)
+                    {
+                        string jsonPath = dlg2.FileName;
+                        JArray array = new JArray();
+                        if (File.Exists(jsonPath))
+                            array = JArray.Parse(File.ReadAllText(jsonPath));
+                        string name = Path.GetFileNameWithoutExtension(xamlPath);
+                        foreach (JObject obj in array) //判重
+                            if (obj["name"] != null && obj["name"].ToString() == name)
+                            {
+                                MessageBox.Show("这个识别名已经存在了！");
+                            }
+                        TextBoxWindow tbw = new TextBoxWindow("卡片标题", name);
+                        if (tbw.ShowDialog() == true)
+                        {
+                            CustomPart part = CustomPart.ConstructFromFile(tbw.Answer, name, dire.Remove(dire.Length - 7), Path.GetFileNameWithoutExtension(jsonPath));
+                            array.Add(part.ToJObject(false));
+                            File.WriteAllText(jsonPath, array.ToString());
+                            resList.Add(part);
+                            MessageBox.Show("导入成功！");
+                        }
+                    }
+                }
+                else throw new Exception("路径错误");
             }
-            FileStream fs = new FileStream(path, FileMode.Create);
-            StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8);
-            sw.Write(ctx);
-            sw.Close();
-            fs.Close();
         }
 
-        public static string ReadFile(string path)
+        private void ThrowButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(path))
-                return null;
-            StreamReader sr = new StreamReader(path, System.Text.Encoding.UTF8);
-            return sr.ReadToEnd();
+            if(ResListBox.SelectedIndex != -1)
+            {
+                cardList.Add(resList[ResListBox.SelectedIndex]);
+            }
         }
     }
 
@@ -500,7 +578,7 @@ namespace WpfApp1
         public virtual string dataFileName { get => name; }
         public abstract string GetDisplayTitle();
         public abstract string GetCode();
-        public abstract JObject ToJObject();
+        public abstract JObject ToJObject(bool withdata = true);
         public abstract string GetData();
         public abstract string type { get; }
         public string displayTitle
@@ -530,7 +608,6 @@ namespace WpfApp1
     {
         string title;
         string xaml;
-        string customPath;
         public override string type { get => "Custom";}
         public override string GetDisplayTitle()
         {
@@ -540,24 +617,57 @@ namespace WpfApp1
         {
             return xaml;
         }
-        public override JObject ToJObject()
+        public override JObject ToJObject(bool withdata = true)
         {
             JObject jobj = new JObject();
             jobj.Add("type", "custom");
             jobj.Add("title", title);
-            if(customPath != null)
-                jobj.Add("custompath", customPath);
+            jobj.Add("name", name);
+            if(withdata)
+                jobj.Add("xaml", xaml);
+            jobj.Add("path", path);
             return jobj;
         }
-        public CustomPart(string _title, string _xaml, string _customPath = null)
+        public CustomPart(string _name,string _title, string _xaml, string _path)
         {
+            name = _name;
             title = _title;
             xaml = _xaml;
-            customPath = _customPath;
+            path = _path;
         }
         public override string GetData()
         {
             return xaml;
+        }
+
+        public override bool isSwaped
+        {
+            get { return false; }
+            set { if (value) MessageBox.Show("你不可以对自定义部分进行折叠！"); }
+        }
+
+        public CustomPart(JObject jobj, string rootpath)
+        {
+            JArray array = JArray.Parse(File.ReadAllText(rootpath + "Customs\\" + jobj["path"].ToString() + ".json"));
+            foreach (JObject item in array)
+            {
+                if (item["name"].ToString() == jobj["name"].ToString())
+                {
+                    this.title = item["title"].ToString();
+                    this.xaml = File.ReadAllText(rootpath + "Customs\\" + item["name"] + ".xaml");
+                    this.name = item["name"].ToString();
+                    this.path = item["path"].ToString();
+                    return;
+                }
+            }
+            throw new Exception("无法找到信息");
+        }
+
+        public static CustomPart ConstructFromFile(string title,string name,string rootpath,string path)
+        {
+            if (!File.Exists(rootpath + "Customs\\" + name + ".xaml"))
+                throw new IOException("构建CustomPart时不存在该文件");
+            return new CustomPart(name,title,File.ReadAllText(rootpath + "Customs\\" + name + ".xaml"),path);
         }
     }
 
@@ -581,7 +691,7 @@ namespace WpfApp1
             return output;
         }
 
-        public override JObject ToJObject()
+        public override JObject ToJObject(bool _=true)
         {
             JObject jobj = new JObject();
             jobj.Add("type", "separator");
@@ -611,7 +721,7 @@ namespace WpfApp1
         public override bool isSwaped
         {
             get { return false; }
-            set { MessageBox.Show("你不可以对分隔符进行折叠！"); }
+            set { if(value) MessageBox.Show("你不可以对分隔符进行折叠！"); }
         }
         public override string GetData()
         {
