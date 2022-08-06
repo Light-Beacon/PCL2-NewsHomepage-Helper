@@ -310,7 +310,7 @@ namespace NewsHomepageHelper {
         }
         
         /// <summary>
-        ///   查找类似 &lt;StackPanel Margin=&quot;0,-10,0,0&quot;&gt;
+        ///   查找类似 &lt;StackPanel xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot; xmlns:local=&quot;clr-namespace:PCL2&quot; &gt;&lt;StackPanel Margin=&quot;0,-10,0,0&quot;&gt;
         ///	&lt;!--Animations Starts--&gt;
         ///	&lt;StackPanel.Triggers&gt; 的本地化字符串。
         /// </summary>
@@ -350,6 +350,15 @@ namespace NewsHomepageHelper {
         internal static string Stut4 {
             get {
                 return ResourceManager.GetString("Stut4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 &lt;/StackPanel&gt; 的本地化字符串。
+        /// </summary>
+        internal static string StutEnd {
+            get {
+                return ResourceManager.GetString("StutEnd", resourceCulture);
             }
         }
         

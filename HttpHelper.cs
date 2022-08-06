@@ -5,11 +5,18 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Windows;
+using static WpfApp1.Debug;
 
 namespace WpfApp1
 {
     class HttpHelper
     {
+        public static void Download(string url,string path)
+        {
+            WebClient web = new WebClient();
+            web.DownloadFile(url,path);
+        }
 
         /// <summary>  
         /// 创建GET方式的HTTP请求  
@@ -35,7 +42,22 @@ namespace WpfApp1
                 request.CookieContainer = new CookieContainer();
                 request.CookieContainer.Add(cookies);
             }
+            request.Timeout = timeout;
+            request.UserAgent = userAgent;
             return request.GetResponse() as HttpWebResponse;
+        }
+
+        public static string GetHttpStringResponseString(string url)
+        {
+            Log("正在执行：GET " + url);
+            HttpWebResponse rsp = HttpHelper.CreateGetHttpResponse(url, 2000, "NHPH", new CookieCollection());
+            if (!rsp.StatusCode.Equals(HttpStatusCode.OK))
+            {
+                MessageBox.Show($"无法连接到服务器...{rsp.StatusCode}", "错误");
+                throw new Exception(rsp.StatusCode.ToString());
+            }
+            Log("已接收来自" + url + "的网络回应");
+            return GetResponseString(rsp);
         }
 
         /// <summary>  

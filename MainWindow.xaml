@@ -7,16 +7,13 @@
         mc:Ignorable="d"
         Title="新闻主页构建工具" Height="712" Width="800" Icon="/Resources/LOGO.png">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="150*"/>
-        </Grid.RowDefinitions>
-        <TabControl Padding="0" Grid.RowSpan="2" SelectionChanged="TabControl_SelectionChanged">
+        <TabControl Padding="0" Grid.RowSpan="3" >
             <TabItem Header="首页管理">
                 <Grid Background="#FFC0D0D5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="350"/>
-                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="200"/>
                     </Grid.RowDefinitions>
                     <GroupBox Header="内容管理" Margin="10,5">
                         <Grid>
@@ -29,7 +26,7 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
-                            <ListBox x:Name="ContentListBox" Margin="8,5" Grid.Column="0" Grid.Row="0">
+                            <ListBox x:Name="ContentListBox" Margin="8,5" Grid.Column="0" Grid.Row="0" ScrollViewer.CanContentScroll="True" >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="0,2">
@@ -48,7 +45,7 @@
                                 <Button x:Name="ContentMoveDownBtn" Content="↓" Width="30" Margin="3" FontFamily="Microsoft YaHei UI" Click="ContentMoveDownBtn_Click"/>
                                 <Button x:Name="ContentDelBtn" Content="X" Width="30" Margin="3" FontFamily="Microsoft YaHei UI" Click="ContentDelBtn_Click"/>
                                 <Button x:Name="SeparatorBtn" Content="--" Width="30" Margin="3" FontFamily="Microsoft YaHei UI" Click="SeparatorBtn_Click"/>
-                                <Button Content="编辑" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" IsEnabled="False"/>
+                                <Button x:Name="EditBtn" Content="编辑" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="EditBtn_Click"/>
                                 <Button x:Name="ContentFoldBtn" Content="折叠" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="ContentFoldBtn_Click"/>
                                 <Button x:Name="SaveBtn" Content="保存" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="SaveBtn_Click" />
                                 <Button x:Name="LoadBtn" Content="加载" Width="35" Margin="3" FontFamily="Microsoft YaHei UI" Click="LoadBtn_Click" />
@@ -74,14 +71,15 @@
                             </StackPanel>
                         </Grid>
                     </GroupBox>
+
                 </Grid>
             </TabItem>
-            <TabItem Header="版本创建">
+            <TabItem Header="版本创建" x:Name="VersionCreatePage" IsEnabled="False">
                 <Grid Background="#FFC0D0D5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="110"/>
                         <RowDefinition/>
-                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="120"/>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
@@ -90,6 +88,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="120"/>
                                 <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="120" />
                                 <ColumnDefinition Width="70" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -97,7 +96,7 @@
                                 <RowDefinition Height="28"/>
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <Border Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="#A0c0c5" Margin="5,0,2.4,-0.2" CornerRadius="4"/>
+                            <Border Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="3" Background="#A0c0c5" Margin="5,0,2.4,-0.2" CornerRadius="4"/>
                             <StackPanel Margin="5,5,5,4.8" Grid.Column="0" Grid.RowSpan="2">
                                 <RadioButton Content="自动填写最新版" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="VersionTypes" Checked="AutoFill_Checked" Foreground="#FF14363C" />
                                 <RadioButton Content="由下拉列表选择" HorizontalAlignment="Left" VerticalAlignment="Top" GroupName="VersionTypes" Checked="Choose_Checked" Foreground="#FF14363C"/>
@@ -123,7 +122,8 @@
                                 <TextBlock  Text="版本类型：" FontStyle="Italic" Foreground="#FF4B676B"/>
                                 <TextBlock Text="请选择版本" FontStyle="Italic" Foreground="#FF4B676B" x:Name="VersionTypeText" MinWidth="150"/>
                             </StackPanel>
-                            <Button Grid.Column="2" Grid.RowSpan="2" BorderBrush="{x:Null}" Height="50" Width="56" Margin="7,0,7.4,2.8" ToolTip="点击访问Gamepedia Minecraft Wiki上当前版本的页面" x:Name="WikiButton" Click="WikiButton_Click" Style="{DynamicResource NoFlowButtonStyle}">
+                            <Image x:Name="VersionImagePreview" Grid.Column="2" Grid.RowSpan="2" Margin="5"/>
+                            <Button Grid.Column="3" Grid.RowSpan="2" BorderBrush="{x:Null}" Height="50" Width="56" Margin="7,0,7.4,2.8" ToolTip="点击访问Gamepedia Minecraft Wiki上当前版本的页面" x:Name="WikiButton" Click="WikiButton_Click" Style="{DynamicResource NoFlowButtonStyle}">
                                 <Button.Background>
                                     <ImageBrush ImageSource="MCWLogo.png" Stretch="Uniform"/>
                                 </Button.Background>
@@ -157,19 +157,23 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition Height="1.25*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition Width="70"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="头图地址" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                             <TextBox x:Name="HeaderImgLinkBox" Text="HeaderImgLink" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="10,0"/>
+                            <Button x:Name="ImportHeaderImgBtn" Grid.Column="2" Margin="0,0,10,0" Content="导入" Click="ImportHeaderImgBtn_Click"/>
                             <TextBlock Text="Wiki" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                            <TextBox x:Name="WikiLinkBox" Text="WikiLink" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="10,0"/>
+                            <TextBox x:Name="WikiLinkBox" Text="WikiLink" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Margin="10,0" Grid.ColumnSpan="2"/>
                             <TextBlock Text="MCBBS"  HorizontalAlignment="Right" VerticalAlignment="Center"  Grid.Column="0"  Grid.Row="2"/>
-                            <TextBox x:Name="MCBBSLinkBox" Text="MCBBSLink" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="10,0"/>
+                            <TextBox x:Name="MCBBSLinkBox" Text="MCBBSLink" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" Margin="10,0" Grid.ColumnSpan="2"/>
                             <TextBlock Text="官网" VerticalAlignment="Center"  Grid.Column="0"  Grid.Row="3" HorizontalAlignment="Right"/>
-                            <TextBox x:Name="MCWebsizeLinkBox" Text="Websize Link" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="10,0"/>
+                            <TextBox x:Name="MCWebsizeLinkBox" Text="Websize Link" VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" Margin="10,0" Grid.ColumnSpan="2"/>
+                            <Button x:Name="AutoFillLinkButton" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0" Content="一键三连？" Click="AutoFillLinkButton_Click"/>
                         </Grid>
                     </Border>
 
@@ -193,6 +197,18 @@
             <TabItem Header="选项" IsEnabled="False">
                 <Grid Background="#FFE5E5E5">
                     <TextBlock FontSize="48"> TO DO :D</TextBlock>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="代码格式化" >
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="FormatCodeBox" Margin="10" Grid.Row="1" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                    <Button x:Name="FormatCodeBtn" Grid.Row="2" Margin="10,5" HorizontalAlignment="Left" Width="70" Content="格式化" Click="FormatCodeBtn_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

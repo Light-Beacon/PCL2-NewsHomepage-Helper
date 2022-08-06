@@ -80,15 +80,7 @@ namespace WpfApp1
         }
         public void GetVersions(string url = "https://launchermeta.mojang.com/mc/game/version_manifest.json")
         {
-            Log("正在执行：GET " + url);
-            HttpWebResponse rsp = HttpHelper.CreateGetHttpResponse(url, 1500, "", new CookieCollection());
-            if (!rsp.StatusCode.Equals(HttpStatusCode.OK))
-            {
-                MessageBox.Show("无法连接到服务器...", "错误");
-                return;
-            }
-            string response = HttpHelper.GetResponseString(rsp);
-            Log("已接收来自" + url + "的网络回应");
+            string response = HttpHelper.GetHttpStringResponseString(url);
             JObject Jrsp = JObject.Parse(response);
             JArray Jver = (JArray)Jrsp["versions"];
             Versions = new MCVersion[Jver.Count()];
